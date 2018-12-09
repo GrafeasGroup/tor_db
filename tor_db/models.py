@@ -25,8 +25,8 @@ class Volunteer(models.Model):
 
     gamma = models.IntegerField(default=0)
     accepted_coc = models.BooleanField(default=False)
-    join_date = models.DateField(default=None)
-    last_login_time = models.DateTimeField(default=None)
+    join_date = models.DateField(default=timezone.now)
+    last_login_time = models.DateTimeField(default=None, null=True, blank=True)
 
     def __repr__(self):
         # noinspection PyUnresolvedReferences
@@ -48,8 +48,8 @@ class Post(models.Model):
 
     # obviously these should be the same, but it makes it a lot easier to
     # perform checks as to who claimed so that we don't have to query reddit
-    claim_time = models.DateTimeField(default=None)
-    complete_time = models.DateTimeField(default=None)
+    claim_time = models.DateTimeField(default=None, null=True, blank=True)
+    complete_time = models.DateTimeField(default=None, null=True, blank=True)
 
     # Where does it come from? Reddit? A library?
     source = models.CharField(max_length=20)
