@@ -1,0 +1,5 @@
+db.sqlite3
+.venv/*
+.idea/*
+tor_db/migrations/*
+tor_db/__pycache__/*
