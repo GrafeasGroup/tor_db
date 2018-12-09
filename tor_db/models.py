@@ -85,7 +85,7 @@ class APIKeys(models.Model):
     # all API keys are from UUID4
     api_key = models.CharField(max_length=36)
     is_admin = models.BooleanField(default=False)
-    date_granted = models.DateField(timezone.now())
+    date_granted = models.DateField(timezone.now)
     authorized_by = models.ForeignKey(
         Volunteer, on_delete=models.CASCADE, related_name='authorized_by'
     )
