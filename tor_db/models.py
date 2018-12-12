@@ -74,7 +74,7 @@ class Transcription(models.Model):
     text = models.CharField(max_length=4294000000)
 
     def __repr__(self):
-        return f"<Transcription - {self.post}>"
+        return f"<Transcription - {self.post} by {self.author.user.username}>"
 
 
 class APIKeys(models.Model):
@@ -89,3 +89,17 @@ class APIKeys(models.Model):
     authorized_by = models.ForeignKey(
         Volunteer, on_delete=models.CASCADE, related_name='authorized_by'
     )
+
+    def __repr__(self):
+        return f"<APIKey - registered to {self.volunteer.user.username}>"
+
+
+class RequestLog(models.Model):
+    api_key = models.ForeignKey(APIKeys, on_delete=models.CASCADE)
+    ip_address = models.IPAddressField()
+    endpoint = models.CharField(max_length=2083)
+    request_data = models.CharField(max_length=4294000000)
+    request_time = models.DateField(default=timezone.now)
+
+    def __repr__(self):
+        return f"<RequestLog - IP {self.ip_address}>"
